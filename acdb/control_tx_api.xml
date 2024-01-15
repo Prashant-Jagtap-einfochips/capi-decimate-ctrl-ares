@@ -1,0 +1,65 @@
+<MODULE_DEF versionMajor="0x0" versionMinor="0x0" versionBranch="0x0" versionSubBranch="0x0" title1="Media Format APIs" _title_agile_rev="Media Format APIs"
+  title_date="August 13, 2018">
+  <PROCESSORS/>
+  <MODULE_LIST>
+    <MODULE name="MODULE_ID_CONTROL_TX" id="0x10015659" displayName="CONTROL TX" description="decimate in the audio preprocessor path.\nThis module supports the#[
+      #] following parameter IDs \nPARAM_ID_MODULE_ENABLE\nDECIMATE_PARAM_DECIMATION_FACTOR Supported Input Media Format:\nAll parameter IDs are device#[
+      #] independent.\nSupported Input Media Format:\n*  - Data Format          : FIXED_POINT\n*  - fmt_id               : Don't care\n*  - Sample Rates        #[
+      #] : Any (>0)\n*  - Number of channels   : 1 to 32\n*  - Channel type         : 1 to 63\n*  - Bits per sample      : 16, 24, 32\n*  - Q format            #[
+      #] : 15 for bits per sample = 16 and 27 for bps = 32 and bps = 24\n*  - Interleaving         : de-interleaved unpacked\n*  - Signed/unsigned      : Signed"
+      builtin="false" isOffloadable="true">
+      <MODULE_INFO>
+        <DATA_PORT_INFO>
+          <INPUT_PORTS max="0x1">
+            <PORT name="IN" id="0x2"/>
+          </INPUT_PORTS>
+          <OUTPUT_PORTS max="0x1">
+            <PORT name="OUT" id="0x1"/>
+          </OUTPUT_PORTS>
+        </DATA_PORT_INFO>
+        <CONTROL_PORT_INFO>
+          <STATIC/>
+          <DYNAMIC>
+            <INTENT name="Control port description" id="0x18001231" max="0x1"/>
+          </DYNAMIC>
+        </CONTROL_PORT_INFO>
+        <CAPABILITIES/>
+        <SUPPORTEDCONTTYPES>
+          <SUPPORTEDCONTTYPE name="Specialized" id="0xb001000"/>
+          <SUPPORTEDCONTTYPE name="Generic" id="0xb001001"/>
+        </SUPPORTEDCONTTYPES>
+        <STACKSIZE stackSize="0x1000"/>
+        <TOOL_POLICIES>
+          <POLICY name="CALIBRATION"/>
+        </TOOL_POLICIES>
+      </MODULE_INFO>
+      <PARAMETER_LIST>
+        <PARAMETER name="PARAM_ID_MODULE_ENABLE" pid="0x8001026" maxSize="0x4" description="ID for the Enable parameter used by any audio processing module. This#[
+          #] generic/common parameter is used to configure or determine the state of any audio processing module.">
+          <TOOL_POLICIES>
+            <POLICY name="CALIBRATION"/>
+            <POLICY name="RTC"/>
+          </TOOL_POLICIES>
+          <DEFAULT_DEPENDENCIES/>
+          <CONFIG_ELEMENT name="enable" type="unsigned int" typeUnSigned="true" byteSize="0x4" byteOffset="0x0" min="0x0" max="0xffffffff" default="0x0"
+            description="Specifies whether the module is to be enabled or disabled." policy="BASIC">
+            <RANGE_LIST>
+              <RANGE name="Disable" value="0x0"/>
+              <RANGE name="Enable" value="0x1"/>
+            </RANGE_LIST>
+          </CONFIG_ELEMENT>
+        </PARAMETER>
+        <PARAMETER name="DECIMATE_PARAM_DECIMATION_FACTOR" pid="0x800122d" maxSize="0x4" description="Decimate algorithm.\nFixed size for this parameter#[
+          #] \nVersion 0 - 4 bytes\n\n">
+          <TOOL_POLICIES>
+            <POLICY name="RTC"/>
+            <POLICY name="CALIBRATION"/>
+          </TOOL_POLICIES>
+          <DEFAULT_DEPENDENCIES/>
+          <CONFIG_ELEMENT name="decimation_factor" type="unsigned int" typeUnSigned="true" byteSize="0x4" byteOffset="0x0" min="0x0" max="0xffffffff"
+            default="0x0" description="Controls audio decimation" policy="BASIC"/>
+        </PARAMETER>
+      </PARAMETER_LIST>
+    </MODULE>
+  </MODULE_LIST>
+</MODULE_DEF>

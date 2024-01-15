@@ -1,0 +1,13 @@
+local pak_utils = require 'p4://qctp406/source/qcom/qct/platform/adsp/buildtools/pakman/libs/pak_utils.lua'
+local hexagon_vs = require 'p4://qctp406/source/qcom/qct/platform/adsp/buildtools/pakman/libs/default_hexagon_vs.lua'
+local everyv = require 'p4://qctp406/source/qcom/qct/platform/adsp/buildtools/pakman/libs/everyv.lua'
+
+Vs = {}
+pak_utils.addVs(Vs, hexagon_vs)
+
+return everyv.package {
+  params = params,
+  variations = Vs,
+  defaultVariation = "hexagon_Debug_dynamic",
+}
+

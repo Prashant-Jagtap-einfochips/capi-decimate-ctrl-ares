@@ -1,0 +1,29 @@
+SPF_ROOT = $(HEXAGON_SDK_ROOT)/addons/audio/spf
+INC_DIR_AUDIO = $(SPF_ROOT)/incs
+INCDIRS += \
+   inc \
+   src \
+   $(INC_DIR_AUDIO)/spf/utils/list/inc \
+   $(INC_DIR_AUDIO)/spf/interfaces/module/capi \
+   $(INC_DIR_AUDIO)/spf/interfaces/module/metadata/api \
+   $(INC_DIR_AUDIO)/platform/posal/inc \
+   $(INC_DIR_AUDIO)/api/ar_utils \
+   $(INC_DIR_AUDIO)/api/modules \
+   $(INC_DIR_AUDIO)/api/ar_utils/hexagon/sim \
+   $(INC_DIR_AUDIO)/gpr/platform/qurt/osal/api \
+   $(INC_DIR_AUDIO)/platform/posal/inc/hexagon \
+   $(SPF_ROOT)/test/test_capi/inc \
+   
+BUILD_LIBS = spf_list_utils
+
+spf_list_utils_C_SRCS += \
+   src/spf_list_utils \
+   src/spf_list_utils_island \
+
+# copy final build products to the ship directory
+BUILD_COPIES = \
+   inc/spf_list_utils.h \
+   $(DLLS) \
+   $(EXES) \
+   $(LIBS) \
+   $(SHIP_DIR)/ ;

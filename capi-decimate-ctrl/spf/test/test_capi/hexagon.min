@@ -1,0 +1,38 @@
+SPF_ROOT = $(HEXAGON_SDK_ROOT)/addons/audio/spf
+INC_DIR_AUDIO = $(SPF_ROOT)/incs
+LIBS_INC_DIR_AUDIO = $(SPF_ROOT)/libs
+INCDIRS += \
+   inc \
+   src \
+   $(INC_DIR_AUDIO)/spf/interfaces/module/capi \
+   $(INC_DIR_AUDIO)/spf/interfaces/module/shared_lib_api/inc \
+   $(INC_DIR_AUDIO)/spf/interfaces/module/capi_cmn/inc \
+   $(INC_DIR_AUDIO)/spf/interfaces/module/capi/adv \
+   $(INC_DIR_AUDIO)/spf/interfaces/module/metadata/api \
+   $(INC_DIR_AUDIO)/api/modules \
+   $(INC_DIR_AUDIO)/api/apm \
+   $(INC_DIR_AUDIO)/spm/api \
+   $(INC_DIR_AUDIO)/platform/posal/inc \
+   $(INC_DIR_AUDIO)/platform/posal/inc/hexagon \
+   $(INC_DIR_AUDIO)/api/ar_utils \
+   $(INC_DIR_AUDIO)/api/ar_utils/hexagon/sim \
+   $(INC_DIR_AUDIO)/gpr/platform/qurt/osal/api \
+   $(LIBS_INC_DIR_AUDIO)/posal_utils/inc \
+   $(INC_DIR_AUDIO)/core/api/services \
+   $(HEXAGON_SDK_ROOT)/incs/
+
+BUILD_LIBS = test_capi
+
+test_capi_C_SRCS += \
+   src/gen_topo_metadata \
+
+ test_capi_CPP_SRCS += \
+   src/capi_test \
+   src/capi_test_utils \
+
+BUILD_COPIES = \
+   inc/capi_test.h \
+   inc/gen_topo_metadata.h \
+   inc/capi_test_utils.h \
+   $V/test_capi$(LIB_EXT) \
+   $(SHIP_DIR)/ ;

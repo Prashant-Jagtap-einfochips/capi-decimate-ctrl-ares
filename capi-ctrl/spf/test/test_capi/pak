@@ -1,0 +1,26 @@
+
+local root = 'p4://qctp406/source/qcom/qct/platform/adsp'
+local proj = root .. '/proj'
+
+local md = require (root .. '/buildtools/pakman/libs/mdlib.lua')
+
+local incs = {
+  proj .. '/inc/HAP',
+  proj .. '/inc/stddef',
+  proj .. '/inc/audio',
+  proj .. '/inc/a1std',
+  proj .. '/test_profile',
+  proj .. '/capi_utils_props',
+}
+
+local exts = {
+  hexagon = "mk/hexagon",
+}
+
+return md.cPackage {
+  params = params,
+  incdirs = incs,
+  extensions = exts,
+  depsRoot = root,
+}
+

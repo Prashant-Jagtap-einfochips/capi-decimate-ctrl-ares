@@ -1,0 +1,12 @@
+{
+capi_cmn_ctrl_port_operation_handler;
+capi_cmn_ctrl_port_list_get_next_port_data;
+capi_cmn_imcl_get_one_time_buf;
+capi_cmn_imcl_send_to_peer;
+__gxx_personality_v0;
+__cxa_begin_catch;
+__ZSt9terminatev;
+__cxa_finalize;
+new;
+_ZSt9terminatev;
+};
