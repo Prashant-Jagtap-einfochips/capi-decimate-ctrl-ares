@@ -21,7 +21,7 @@
 
 #define CAPI_DECIMATE_MAX_IN_PORTS 1
 #define CAPI_DECIMATE_MAX_OUT_PORTS 1
-#define DECIMATE_STACK_SIZE 4096
+#define DECIMATE_STACK_SIZE 8192
 
 #define MODULE_ID_DECIMATE 0x10015658
 /**
@@ -32,7 +32,8 @@
     @h2xmlm_description  {decimate in the audio preprocessor path.\n
                        This module supports the following parameter IDs \n
                        PARAM_ID_MODULE_ENABLE\n
-                       DECIMATE_PARAM_DECIMATION_FACTOR
+                       DECIMATE_PARAM_DECIMATION_FACTOR\n
+                       DECIMATE_PARAM_COEFF_ARR
                       Supported Input Media Format:\n
 
       All parameter IDs are device independent.\n
@@ -87,6 +88,28 @@ struct decimate_factor_cfg_t
 #include "spf_end_pack.h"
 ;
 
+#define DECIMATE_PARAM_COEFF_ARR 0x0800122E
+
+/* Structure definition for Parameter */
+typedef struct control_tx_coeff_arr_t control_tx_coeff_arr_t;
+
+/** @h2xmlp_parameter   {"DECIMATE_PARAM_COEFF_ARR",
+                         DECIMATE_PARAM_COEFF_ARR}
+    @h2xmlp_description {parameter used to send the coefficients to RX
+                         from the control module.} */
+#include "spf_begin_pack.h"
+
+struct control_tx_coeff_arr_t
+{
+   uint8_t coeff_val[4096];
+   /**< @h2xmle_description {Coefficient values}
+        @h2xmle_default     {0x00}
+        @h2xmle_range       {0..0xFF}
+        
+        @h2xmle_policy      {Basic} */
+}
+#include "spf_end_pack.h"
+;
 
 /** @}                   <-- End of the Module -->*/
 

@@ -108,12 +108,13 @@ typedef struct control_tx
    io_buffer_ptr_t               data_ptrs;
    uint32_t                      enable_flag;
    uint32_t                      decimation_factor;
+   uint8_t                       coeff_val[4096];
    uint32_t *                    out_samples;
    uint32_t                      threshold_in_bytes;
    bool_t                        is_mf_received; // set this flag when you receive input media format
    
       /* IMCL */
-   decimate_is_ctrl_port_info_rcvd_t   	  is_ctrl_port_received; 
+   decimate_is_ctrl_port_info_rcvd_t   	  is_decimate_ctrl_port_received; 
    capi_heap_id_t heap_info;
    ctrl_port_list_handle_t ctrl_port_info; 
    ctrl_port_data_t *ctrl_port_ptr;

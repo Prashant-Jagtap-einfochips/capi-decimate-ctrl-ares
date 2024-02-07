@@ -112,6 +112,7 @@ typedef struct capi_decimate
    io_buffer_ptr_t               data_ptrs;
    uint32_t                      enable_flag;
    uint32_t                      decimation_factor;
+   uint8_t                       coeff_val[4096];
    uint32_t *                    out_samples;
    uint32_t                      threshold_in_bytes;
    bool_t                        is_mf_received; // set this flag when you receive input media format

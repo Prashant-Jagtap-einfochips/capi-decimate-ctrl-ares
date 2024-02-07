@@ -399,6 +399,21 @@ static capi_err_t capi_decimate_set_param(capi_t *                _pif,
          }
          break;
       }
+      
+      case CAPI_PARAM_ID_UPDATE_DECIMATION_COEFFS:
+      {
+         if (params_ptr->actual_data_len >= sizeof(control_tx_coeff_arr_t))
+         {
+            control_tx_coeff_arr_t *cfg_ptr = (control_tx_coeff_arr_t *)(params_ptr->data_ptr);
+            memcpy(me_ptr->coeff_val, cfg_ptr->coeff_val, sizeof(cfg_ptr->coeff_val));   
+         }
+         else
+         {
+            AR_MSG(DBG_ERROR_PRIO, "CAPI DECIMATE: <<set_param>> Bad param size %lu", params_ptr->actual_data_len);
+            return CAPI_ENEEDMORE;
+         }
+         break;
+      }
       case INTF_EXTN_PARAM_ID_IMCL_PORT_OPERATION:
       {
 	 AR_MSG(DBG_ERROR_PRIO,"IMC port operation handler here\n");
@@ -501,6 +516,25 @@ static capi_err_t capi_decimate_get_param(capi_t *                _pif,
          break;
       }
 
+      case CAPI_PARAM_ID_UPDATE_DECIMATION_COEFFS:
+      {
+         if (params_ptr->max_data_len >= sizeof(control_tx_coeff_arr_t))
+         {
+            control_tx_coeff_arr_t *cfg_ptr = (control_tx_coeff_arr_t *)(params_ptr->data_ptr);
+            memcpy(cfg_ptr->coeff_val, me_ptr->coeff_val, sizeof(me_ptr->coeff_val));
+            params_ptr->actual_data_len    = sizeof(control_tx_coeff_arr_t);
+         }
+         else
+         {
+            AR_MSG(DBG_ERROR_PRIO,
+                   "CAPI DECIMATE: <<get_param>> Bad param size %lu  Param id = %lu",
+                   params_ptr->max_data_len,
+                   param_id);
+            return CAPI_ENEEDMORE;
+         }
+         break;
+      }
+
       default:
       {
          AR_MSG(DBG_ERROR_PRIO, "CAPI DECIMATE: Get unsupported param ID 0x%x", (int)param_id);
@@ -560,7 +594,7 @@ capi_err_t DecimateRx_imc_set_param_handler (capi_decimate_t * me_ptr, capi_buf_
       result |= CAPI_EBADPARAM;
       return result;
    }
-   
+
    // Level 1 check
    if(intent_buf_ptr->actual_data_len < MIN_INCOMING_IMCL_PARAM_SIZE_DECIMATE)
    {
@@ -588,12 +622,12 @@ capi_err_t DecimateRx_imc_set_param_handler (capi_decimate_t * me_ptr, capi_buf_
                AR_MSG(DBG_ERROR_PRIO,"IMC Param id 0x%lx Invalid payload size for incoming data %d",header_ptr->opcode, header_ptr->actual_data_len);
                return CAPI_ENEEDMORE;
             }
-            
+
             capi_decimate_control_data_payload_t *cfg_ptr = (capi_decimate_control_data_payload_t *) payload_ptr;
 
             // Set decimation factor on dest side and
             // raise media event to update decimation factor
-            if (cfg_ptr->decimation_factor <= 1)
+            if (cfg_ptr->decimation_factor >= 1)
             {
                if (cfg_ptr->decimation_factor != me_ptr->decimation_factor)
                {
@@ -601,6 +635,7 @@ capi_err_t DecimateRx_imc_set_param_handler (capi_decimate_t * me_ptr, capi_buf_
                   AR_MSG(DBG_HIGH_PRIO,
                          "CAPI DECIMATE: <<set_param>> Decimation factor set to %lu",
                          me_ptr->decimation_factor);
+
                   if (me_ptr->is_mf_received)
                   {
                      // we need to raise output media format because it depends on decimation factor as well, and we
@@ -624,21 +659,34 @@ capi_err_t DecimateRx_imc_set_param_handler (capi_decimate_t * me_ptr, capi_buf_
                       "Decimation factor should be greater than 1 ");
                return CAPI_EUNSUPPORTED;
             }
+            break;
+         }
+
+         case PARAM_ID_DECIMATE_COEFF_IMC_PAYLOAD:
+         {
+            if (header_ptr->actual_data_len < sizeof(capi_decimate_coeff_arr_payload_t))
+            {
+               AR_MSG(DBG_ERROR_PRIO,"IMC Param id 0x%lx Invalid payload size for incoming data %d",header_ptr->opcode, header_ptr->actual_data_len);
+               return CAPI_ENEEDMORE;
+            }
+
+            capi_decimate_coeff_arr_payload_t *cfg_ptr = (capi_decimate_coeff_arr_payload_t *) payload_ptr;
+            memcpy(me_ptr->coeff_val, cfg_ptr->coeff_val, sizeof(cfg_ptr->coeff_val));
 
             break;
          }
-      
+
          default:
          {
             AR_MSG(DBG_ERROR_PRIO,"Unsupported opcode for incoming data over IMCL %d", header_ptr->opcode);
             return CAPI_EUNSUPPORTED;
          }
-         
+
          AR_MSG(DBG_HIGH_PRIO,"IMC Set param 0x%x done. payload size = %lu", header_ptr->opcode, header_ptr->actual_data_len);
       }
-   
+
       payload_ptr += header_ptr->actual_data_len;
       payload_size -= header_ptr->actual_data_len;
    }
    return result;
-}  
+}
