@@ -3,11 +3,11 @@
   <PROCESSORS/>
   <MODULE_LIST>
     <MODULE name="MODULE_ID_CONTROL_TX" id="0x10015659" displayName="CONTROL TX" description="decimate in the audio preprocessor path.\nThis module supports the#[
-      #] following parameter IDs \nPARAM_ID_MODULE_ENABLE\nDECIMATE_PARAM_DECIMATION_FACTOR Supported Input Media Format:\nAll parameter IDs are device#[
-      #] independent.\nSupported Input Media Format:\n*  - Data Format          : FIXED_POINT\n*  - fmt_id               : Don't care\n*  - Sample Rates        #[
-      #] : Any (>0)\n*  - Number of channels   : 1 to 32\n*  - Channel type         : 1 to 63\n*  - Bits per sample      : 16, 24, 32\n*  - Q format            #[
-      #] : 15 for bits per sample = 16 and 27 for bps = 32 and bps = 24\n*  - Interleaving         : de-interleaved unpacked\n*  - Signed/unsigned      : Signed"
-      builtin="false" isOffloadable="true">
+      #] following parameter IDs \nPARAM_ID_MODULE_ENABLE\nDECIMATE_PARAM_DECIMATION_FACTOR\nDECIMATE_PARAM_COEFF_ARR Supported Input Media Format:\nAll#[
+      #] parameter IDs are device independent.\nSupported Input Media Format:\n*  - Data Format          : FIXED_POINT\n*  - fmt_id               : Don't care\n*#[
+      #]  - Sample Rates         : Any (>0)\n*  - Number of channels   : 1 to 32\n*  - Channel type         : 1 to 63\n*  - Bits per sample      : 16, 24, 32\n* #[
+      #] - Q format             : 15 for bits per sample = 16 and 27 for bps = 32 and bps = 24\n*  - Interleaving         : de-interleaved unpacked\n*  -#[
+      #] Signed/unsigned      : Signed" builtin="false" isOffloadable="true">
       <MODULE_INFO>
         <DATA_PORT_INFO>
           <INPUT_PORTS max="0x1">
@@ -28,7 +28,7 @@
           <SUPPORTEDCONTTYPE name="Specialized" id="0xb001000"/>
           <SUPPORTEDCONTTYPE name="Generic" id="0xb001001"/>
         </SUPPORTEDCONTTYPES>
-        <STACKSIZE stackSize="0x1000"/>
+        <STACKSIZE stackSize="0x2000"/>
         <TOOL_POLICIES>
           <POLICY name="CALIBRATION"/>
         </TOOL_POLICIES>
@@ -41,7 +41,7 @@
             <POLICY name="RTC"/>
           </TOOL_POLICIES>
           <DEFAULT_DEPENDENCIES/>
-          <CONFIG_ELEMENT name="enable" type="unsigned int" typeUnSigned="true" byteSize="0x4" byteOffset="0x0" min="0x0" max="0xffffffff" default="0x0"
+          <CONFIG_ELEMENT name="enable" type="uint32_t" typeUnSigned="true" byteSize="0x4" byteOffset="0x0" min="0x0" max="0xffffffff" default="0x0"
             description="Specifies whether the module is to be enabled or disabled." policy="BASIC">
             <RANGE_LIST>
               <RANGE name="Disable" value="0x0"/>
@@ -58,6 +58,16 @@
           <DEFAULT_DEPENDENCIES/>
           <CONFIG_ELEMENT name="decimation_factor" type="unsigned int" typeUnSigned="true" byteSize="0x4" byteOffset="0x0" min="0x0" max="0xffffffff"
             default="0x0" description="Controls audio decimation" policy="BASIC"/>
+        </PARAMETER>
+        <PARAMETER name="DECIMATE_PARAM_COEFF_ARR" pid="0x800122f" maxSize="0x1000" description="parameter used to send the coefficients to RX from the control#[
+          #] module.">
+          <TOOL_POLICIES>
+            <POLICY name="RTC"/>
+            <POLICY name="CALIBRATION"/>
+          </TOOL_POLICIES>
+          <DEFAULT_DEPENDENCIES/>
+          <CONFIG_ELEMENT name="coeff_val" type="unsigned char" typeUnSigned="true" byteSize="0x1" byteOffset="0x0" arrayElements="4096" min="0x0" max="0xff"
+            default="0x0" description="Coefficient values" policy="BASIC"/>
         </PARAMETER>
       </PARAMETER_LIST>
     </MODULE>

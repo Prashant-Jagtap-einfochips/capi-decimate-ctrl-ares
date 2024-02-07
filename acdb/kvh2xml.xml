@@ -328,7 +328,7 @@
     <TAG id="0xc0000016" name="stream_reverb"/>
     <TAG id="0xc0000017" name="stream_pbe"/>
     <TAG id="0xc0000018" name="stream_bassboost"/>
-    <TAG id="0xc0000020" name="capi_decimate"/>
+    <TAG id="0xc0000020" name="capi_rx"/>
 	<TAG id="0xc0000021" name="control_tx"/>
   </MODULE_TAGS>
 </KEY_DEF>
