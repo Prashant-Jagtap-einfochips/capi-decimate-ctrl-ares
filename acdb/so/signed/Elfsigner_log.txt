@@ -1,0 +1,101 @@
+Logging to /home/einfochips/Qualcomm/5.4.0.3/utils/scripts/12March_dcimate/output/Elfsigner_log.txt
+------------------------------------------------------------
+Logging to /home/einfochips/Qualcomm/5.4.0.3/utils/scripts/12March_dcimate/output/secimage_output/SecImage_log.txt
+
+
+     SecImage v5.50 launched as: "/home/einfochips/Qualcomm/5.4.0.3/tools/elfsigner/elfsigner.py -i 12March_dcimate/libcontrol_tx.so -o 12March_dcimate//output"
+
+Config path is set to: /home/einfochips/Qualcomm/5.4.0.3/utils/scripts/12March_dcimate/output/libcontrol_tx_generated_config.xml
+WARNING: OEM ID is set to 0 for sign_id "elf_local"
+------------------------------------------------------
+Processing 1/1: /home/einfochips/Qualcomm/5.4.0.3/utils/scripts/12March_dcimate/libcontrol_tx.so
+
+Performing OEM sign on image: /home/einfochips/Qualcomm/5.4.0.3/utils/scripts/12March_dcimate/libcontrol_tx.so
+
+Attestation Certificate Properties:
+| SW_ID     | 0x0000000000000000  |
+| HW_ID     | 0x0000000000000000  |
+| DEBUG     | 0x0000000000000002  |
+| OEM_ID    | 0x0000              |
+| SW_SIZE   | 200                 |
+| MODEL_ID  | 0x0000              |
+| SHA_ALGO  | SHA256              |
+| EXPONENT  | 3                   |
+| TCG_MIN   | 0x0001E240          |
+| TCG_MAX   | 0x0001E240          |
+
+Signed image is stored at /home/einfochips/Qualcomm/5.4.0.3/utils/scripts/12March_dcimate/output/secimage_output/tcg/elf_local/libcontrol_tx.so
+OEM signed image with PKCS
+Image /home/einfochips/Qualcomm/5.4.0.3/utils/scripts/12March_dcimate/output/secimage_output/tcg/elf_local/libcontrol_tx.so signature is valid
+Image /home/einfochips/Qualcomm/5.4.0.3/utils/scripts/12March_dcimate/output/secimage_output/tcg/elf_local/libcontrol_tx.so is not encrypted
+
+Base Properties: 
+| Integrity Check             | True  |
+| Signed                      | True  |
+| Encrypted                   | False |
+| Size of signature           | 256   |
+| Size of one cert            | 2048  |
+| Num of certs in cert chain  | 3     |
+| Number of root certs        | 1     |
+| Maximum number of root certs| None  |
+| Cert chain size             | 6144  |
+
+ELF Properties: 
+Header: 
+| b'Magic'                   | ELF                           |
+| Class                      | ELF32                          |
+| Data                       | 2's complement, little endian  |
+| Version                    | 1 (Current)                    |
+| OS/ABI                     | No extensions or unspecified   |
+| ABI Version                | 0                              |
+| Type                       | DYN (Shared object file)       |
+| Machine                    | 164                            |
+| Version                    | 0x1                            |
+| Entry address              | 0x00000000                     |
+| Program headers offset     | 0x00000034                     |
+| Section headers offset     | 0x00000000                     |
+| Flags                      | 0x00000068                     |
+| ELF header size            | 52                             |
+| Program headers size       | 32                             |
+| Number of program headers  | 3                              |
+| Section headers size       | 40                             |
+| Number of section headers  | 0                              |
+| String table section index | 0                              |
+
+Program Headers: 
+| Num |   Type   | Offset | VirtAddr | PhysAddr | FileSize | MemSize | Flags | Align |
+|-----|----------|--------|----------|----------|----------|---------|-------|-------|
+|  1  | LOAD     | 0x3000 |  0x0000  |  0x0000  |  0x4064  |  0x4064 |   RE  | 0x1000|
+|  2  | LOAD     | 0x8000 |  0x5000  |  0x5000  |  0x0134  |  0x0134 |   RW  | 0x1000|
+|  3  | DYNAMIC  | 0x8000 |  0x5000  |  0x5000  |  0x00b0  |  0x00b0 |   RW  | 0x4   |
+
+Hash Segment Properties: 
+| Header Size     | 40B     |
+| Hash Algorithm  | sha256  |
+
+Header: 
+| cert_chain_ptr  | 0x000061c8  |
+| cert_chain_size | 0x00001800  |
+| code_size       | 0x000000a0  |
+| image_dest_ptr  | 0x00006028  |
+| image_id        | 0x00000000  |
+| image_size      | 0x000019a0  |
+| image_src       | 0x00000000  |
+| sig_ptr         | 0x000060c8  |
+| sig_size        | 0x00000100  |
+| version         | 0x00000003  |
+
+
+------------------------------------------------------
+
+SUMMARY:
+Following actions were performed: "sign, validate"
+Output is saved at: /home/einfochips/Qualcomm/5.4.0.3/utils/scripts/12March_dcimate/output/secimage_output
+
+| Idx |   SignId  | Parse | Integrity | Sign | Encrypt |              Validate              |
+|     |           |       |           |      |         | Parse | Integrity | Sign | Encrypt |
+|-----|-----------|-------|-----------|------|---------|-------|-----------|------|---------|
+|  1. | elf_local |   T   |     NA    |  T   |    NA   |   T   |     T     |  T   |    NA   |
+
+Signing complete! Output saved at /home/einfochips/Qualcomm/5.4.0.3/utils/scripts/12March_dcimate/output/libcontrol_tx.so
+
